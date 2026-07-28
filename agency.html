@@ -73,5 +73,12 @@
 
   <p class="warn">&#9888; This channel self-destructs from memory the moment you close it.</p>
   <p><a class="back" href="index.html">&larr; return to cover identity</a></p>
+<script>
+  var deny=function(m){try{alert(m);}catch(e){}};
+  document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();if((e.ctrlKey||e.metaKey)&&(k==='s'||k==='u')){e.preventDefault();deny('ACCESS DENIED - This channel cannot be saved.');return false;}if((e.ctrlKey||e.metaKey)&&k==='c'){e.preventDefault();deny('ACCESS DENIED - Copying is restricted.');return false;}});
+  document.addEventListener('copy',function(e){e.preventDefault();if(e.clipboardData){e.clipboardData.setData('text/plain','');}deny('ACCESS DENIED - Copying is restricted.');});
+  document.addEventListener('contextmenu',function(e){e.preventDefault();deny('ACCESS DENIED - EYES ONLY.');});
+</script>
+  
 </body>
 </html>
