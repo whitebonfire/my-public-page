@@ -1,13 +1,106 @@
 <!DOCTYPE html>
-<html>
-  <head>
-        <title>My Public Page</title>
-  </head>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Public Page</title>
+  <style>
+    :root { --ink: #1c1c1c; --paper: #f6f4ef; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    main { max-width: 34rem; padding: 2.5rem 1.5rem; }
+    h1 { font-size: 1.9rem; margin: 0 0 0.75rem; font-weight: normal; }
+    p { line-height: 1.65; margin: 0 0 1rem; }
+    .muted { color: #7a756c; font-size: 0.85rem; }
+    /* The olive in the drink. Unremarkable, until it is not. */
+    .olive {
+      cursor: default;
+      padding: 0 1px;
+      transition: color 300ms ease, text-shadow 300ms ease;
+    }
+    .olive:hover { color: #8a1c1c; text-shadow: 0 0 10px rgba(138, 28, 28, 0.45); }
+    #brief {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 40%, #14181d 0%, #05070a 70%);
+      color: #e8e2d4;
+      font-family: "Courier New", monospace;
+      text-align: center;
+      padding: 2rem;
+      z-index: 99;
+    }
+    #brief.on { display: flex; animation: fade 500ms ease both; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    #brief h2 { color: #d7263d; letter-spacing: 0.35em; font-size: 1rem; margin: 0 0 1.25rem; }
+    #brief .line { margin: 0.2rem 0; font-size: 0.95rem; }
+    .enter {
+      display: inline-block;
+      margin-top: 1.75rem;
+      padding: 0.7rem 1.4rem;
+      border: 1px solid #d7263d;
+      color: #ffe9c9;
+      text-decoration: none;
+      letter-spacing: 0.2em;
+      font-size: 0.8rem;
+    }
+    .enter:hover { background: #d7263d; color: #0b0d10; }
+    .hint { color: #5d6672; font-size: 0.7rem; margin-top: 1.5rem; letter-spacing: 0.1em; }
+  </style>
+</head>
 <body>
-      <h1>Welcome to My Public Page</h1>
-    <p>This page is now public and hosted on GitHub Pages!</p>
+  <main>
+    <h1>Welcome to My Public Page</h1>
+    <p>This page is now public and hosted on GitHub Pages. There is not much here yet: a few notes, a slow hobby, and a martini glass I never got around to washing <span class="olive" id="olive">&#8226;</span></p>
+    <p class="muted">Nothing classified here. Obviously.</p>
+  </main>
+
+  <div id="brief" role="dialog" aria-label="Agency transmission">
+    <div>
+      <h2>CLASSIFIED</h2>
+      <p class="line">INCOMING TRANSMISSION &mdash; SECURE CHANNEL 07</p>
+      <p class="line">Signal routed through a harmless-looking shell page. Cover intact.</p>
+      <p class="line">Zoraxis activity detected. The Agency needs a freelancer.</p>
+      <p class="line">Reminder, Agent: we expect you to die. Kindly do not.</p>
+      <a class="enter" href="agency.html">ACCEPT BRIEFING</a>
+      <p class="hint">press ESC to resume pretending this is a normal page</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var brief = document.getElementById("brief");
+      var olive = document.getElementById("olive");
+      var clicks = 0;
+      var typed = "";
+
+      function open() { brief.classList.add("on"); }
+      function close() { brief.classList.remove("on"); }
+
+      // Easter egg 1: click the olive three times.
+      olive.addEventListener("click", function () {
+        clicks += 1;
+        if (clicks >= 3) { open(); clicks = 0; }
+      });
+
+      // Easter egg 2: type the code word anywhere on the page.
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") { close(); return; }
+        typed = (typed + e.key).slice(-7).toLowerCase();
+        if (typed.indexOf("zoraxis") > -1 || typed.indexOf("ieytd") > -1) { open(); }
+      });
+    })();
+  </script>
 </body>
-</html></p></h1>
-</body></title>
-  </head>
 </html>
