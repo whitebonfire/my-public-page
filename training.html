@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enhanced Operatives Division &mdash; Training</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh;
+  background: radial-gradient(circle at 50% 20%, #16202b 0%, #070a0e 65%);
+  color: #e6e2d6; font-family: "Courier New", monospace;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 3rem 1.25rem 4rem;
+}
+h1 { font-size: 1.5rem; letter-spacing: 0.28em; margin: 0 0 0.25rem; text-align: center; color: #e8c65a; }
+.tag { color: #d7263d; letter-spacing: 0.35em; font-size: 0.72rem; margin-bottom: 0.4rem; text-align: center; }
+.motto { color: #9fb0bf; letter-spacing: 0.2em; font-size: 0.7rem; margin-bottom: 2rem; text-align: center; font-style: italic; }
+.panel {
+  max-width: 44rem; width: 100%;
+  background: rgba(10, 15, 20, 0.7); border: 1px solid #263340;
+  border-radius: 6px; padding: 1.75rem; margin-bottom: 1.5rem;
+}
+.panel h2 { font-size: 0.85rem; letter-spacing: 0.25em; color: #7fb2d6; border-bottom: 1px solid #263340; padding-bottom: 0.5rem; margin: 0 0 1rem; }
+p { line-height: 1.7; margin: 0 0 0.9rem; font-size: 0.95rem; }
+.module { border: 1px solid #263340; border-radius: 4px; padding: 1rem 1.2rem; margin-bottom: 1rem; background: rgba(20,28,36,0.5); }
+.module h3 { margin: 0 0 0.5rem; color: #e8c65a; font-size: 0.9rem; letter-spacing: 0.15em; }
+.opt { display: block; width: 100%; text-align: left; background: #1a2530; color: #e6e2d6; border: 1px solid #33475a; border-radius: 3px; padding: 0.55rem 0.8rem; margin: 0.35rem 0; font-family: inherit; font-size: 0.85rem; cursor: pointer; transition: background 0.15s; }
+.opt:hover { background: #26333f; }
+.opt.correct { background: #1e3d2f; border-color: #3fae6b; }
+.opt.wrong { background: #3d1e24; border-color: #d7263d; }
+.feedback { font-size: 0.78rem; letter-spacing: 0.05em; margin-top: 0.4rem; min-height: 1rem; }
+.score { text-align: center; font-size: 1.1rem; letter-spacing: 0.2em; color: #e8c65a; margin-top: 1rem; }
+.warn { color: #d7263d; letter-spacing: 0.15em; text-align: center; font-size: 0.85rem; margin-top: 0.5rem; }
+a.back { color: #7fb2d6; text-decoration: none; font-size: 0.8rem; letter-spacing: 0.15em; display:block; text-align:center; }
+a.back:hover { color: #ffe9c9; }
+</style>
+</head>
+<body>
+  <h1>AGENT TRAINING PROGRAM</h1>
+  <div class="tag">ENHANCED OPERATIVES DIVISION</div>
+  <div class="motto">&ldquo;Your mind is your best weapon&rdquo;</div>
+
+  <div class="panel">
+    <h2>FIELD BRIEFING</h2>
+    <p>Welcome, operative. Training consists of three drills: cipher decoding, observation recall, and tradecraft judgment. Choose the correct answer for each. Your aggregate score determines field readiness.</p>
+  </div>
+
+  <div class="panel">
+    <h2>DRILL 01 &mdash; CIPHER</h2>
+    <div class="module" data-answer="1">
+      <h3>Decode the Caesar-shifted (+3) word: "VSB"</h3>
+      <button class="opt">CAT</button>
+      <button class="opt">SPY</button>
+      <button class="opt">RUN</button>
+      <div class="feedback"></div>
+    </div>
+
+    <h2>DRILL 02 &mdash; OBSERVATION</h2>
+    <div class="module" data-answer="2">
+      <h3>The division motto states your best weapon is your...</h3>
+      <button class="opt">SIDEARM</button>
+      <button class="opt">CONTACTS</button>
+      <button class="opt">MIND</button>
+      <div class="feedback"></div>
+    </div>
+
+    <h2>DRILL 03 &mdash; TRADECRAFT</h2>
+    <div class="module" data-answer="0">
+      <h3>A stranger claims HQ authorized you to share your location. You should...</h3>
+      <button class="opt">Verify through a trusted channel first</button>
+      <button class="opt">Comply immediately &mdash; they said HQ</button>
+      <button class="opt">Broadcast it publicly</button>
+      <div class="feedback"></div>
+    </div>
+
+    <div class="score" id="score">SCORE: 0 / 3</div>
+  </div>
+
+  <p class="warn">&#9888; TRAINING SIMULATION &mdash; NO LIVE DATA COLLECTED</p>
+  <a class="back" href="index.html">&larr; return to cover identity</a>
+
+<script>
+  var correct = 0, answered = 0, total = 3;
+  document.querySelectorAll('.module').forEach(function(mod){
+    var ans = parseInt(mod.getAttribute('data-answer'), 10);
+    var opts = mod.querySelectorAll('.opt');
+    var fb = mod.querySelector('.feedback');
+    opts.forEach(function(opt, i){
+      opt.addEventListener('click', function(){
+        if (mod.dataset.done) return;
+        mod.dataset.done = '1';
+        answered++;
+        if (i === ans) { opt.classList.add('correct'); fb.textContent = 'CORRECT'; fb.style.color = '#3fae6b'; correct++; }
+        else { opt.classList.add('wrong'); opts[ans].classList.add('correct'); fb.textContent = 'INCORRECT'; fb.style.color = '#d7263d'; }
+        var s = document.getElementById('score');
+        s.textContent = 'SCORE: ' + correct + ' / ' + total;
+        if (answered === total) { s.textContent += (correct === total ? '  \u2014 FIELD READY' : '  \u2014 ADDITIONAL TRAINING ADVISED'); }
+      });
+    });
+  });
+</script>
+</body>
+</html>
