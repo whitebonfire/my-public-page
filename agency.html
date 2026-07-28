@@ -86,30 +86,46 @@ document.addEventListener('copy',function(e){e.preventDefault();if(e.clipboardDa
 document.addEventListener('contextmenu',function(e){e.preventDefault();deny('ACCESS DENIED - EYES ONLY.');});
 
 (function(){
-  var btn=document.getElementById('locBtn');
-  var out=document.getElementById('locVal');
-  if(!btn||!out) return;
-  btn.addEventListener('click',function(){
-    if(!navigator.geolocation){
-      out.textContent='GEOLOCATION UNSUPPORTED';
-      return;
-    }
-    out.textContent='REQUESTING PERMISSION...';
-    btn.disabled=true;
-    navigator.geolocation.getCurrentPosition(
-      function(pos){
-        var lat=pos.coords.latitude.toFixed(4);
-        var lon=pos.coords.longitude.toFixed(4);
-        out.textContent=lat+'\u00b0, '+lon+'\u00b0';
-        btn.textContent='LOCATION TRACED';
-      },
-      function(err){
-        out.textContent=(err.code===1)?'PERMISSION DENIED':'TRACE FAILED';
-        btn.disabled=false;
-      },
-      { enableHighAccuracy:true, timeout:10000 }
-    );
-  });
+var btn=document.getElementById('locBtn');
+var out=document.getElementById('locVal');
+if(!btn||!out) return;
+btn.addEventListener('click',function(){
+if(!navigator.geolocation){
+out.textContent='GEOLOCATION UNSUPPORTED';
+return;
+}
+out.textContent='REQUESTING PERMISSION...';
+btn.disabled=true;
+navigator.geolocation.getCurrentPosition(
+function(pos){
+var lat=pos.coords.latitude;
+var lon=pos.coords.longitude;
+out.textContent='RESOLVING LOCATION...';
+fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+lat+'&longitude='+lon+'&localityLanguage=en')
+.then(function(r){return r.json();})
+.then(function(d){
+var city=d.city||d.locality||d.principalSubdivision||'';
+var region=d.principalSubdivision||'';
+var country=d.countryName||'';
+var parts=[];
+if(city) parts.push(city);
+if(region && region!==city) parts.push(region);
+if(country) parts.push(country);
+out.textContent=parts.length?parts.join(', ').toUpperCase():'LOCATION UNKNOWN';
+btn.textContent='LOCATION TRACED';
+})
+.catch(function(){
+out.textContent='CITY LOOKUP FAILED';
+btn.disabled=false;
+});
+},
+function(err){
+out.textContent=(err.code===1)?'PERMISSION DENIED':'TRACE FAILED';
+btn.disabled=false;
+},
+{ enableHighAccuracy:true, timeout:10000 }
+);
+});
 })();
 </script>
 
