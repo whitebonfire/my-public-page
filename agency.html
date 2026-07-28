@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Agency &mdash; Restricted Access</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at 50% 20%, #16202b 0%, #070a0e 65%);
+      color: #e6e2d6;
+      font-family: "Courier New", monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 1.25rem 4rem;
+    }
+    .seal {
+      width: 96px; height: 96px;
+      border: 2px solid #d7263d;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #d7263d; font-size: 2rem; letter-spacing: 0.1em;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 0 24px rgba(215, 38, 61, 0.35);
+    }
+    h1 { font-size: 1.5rem; letter-spacing: 0.3em; margin: 0 0 0.25rem; text-align: center; }
+    .tag { color: #d7263d; letter-spacing: 0.4em; font-size: 0.75rem; margin-bottom: 2rem; }
+    .panel {
+      max-width: 42rem;
+      width: 100%;
+      background: rgba(10, 15, 20, 0.7);
+      border: 1px solid #263340;
+      border-radius: 6px;
+      padding: 1.75rem 1.75rem 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .panel h2 {
+      font-size: 0.8rem; letter-spacing: 0.25em; color: #7fb2d6;
+      border-bottom: 1px solid #263340; padding-bottom: 0.5rem; margin: 0 0 1rem;
+    }
+    p { line-height: 1.7; margin: 0 0 0.9rem; font-size: 0.95rem; }
+    .field { color: #9fb0bf; }
+    .val { color: #ffe9c9; }
+    .redacted {
+      background: #e6e2d6; color: #e6e2d6;
+      padding: 0 0.35rem; border-radius: 2px; user-select: none;
+    }
+    ul { line-height: 1.8; padding-left: 1.2rem; margin: 0.4rem 0 0; }
+    .warn { color: #d7263d; letter-spacing: 0.15em; text-align: center; font-size: 0.85rem; margin-top: 0.5rem; }
+    a.back { color: #7fb2d6; text-decoration: none; font-size: 0.8rem; letter-spacing: 0.15em; }
+    a.back:hover { color: #ffe9c9; }
+  </style>
+</head>
+<body>
+  <div class="seal">&#9670;</div>
+  <h1>THE AGENCY</h1>
+  <div class="tag">CLEARANCE VERIFIED &mdash; EYES ONLY</div>
+
+  <div class="panel">
+    <h2>MISSION BRIEFING</h2>
+    <p>Welcome, Agent. You found the olive. That means you are either very good or very lucky, and in this line of work the difference tends to sort itself out quickly.</p>
+    <p>This is a fan roleplay hub inspired by the VR spy comedy <span class="val">I Expect You To Die</span>. You are a freelance secret agent with a knack for surviving death traps &mdash; car ejector seats, escape rooms, doomsday devices, and the occasional very rude shark. Your only tools are your wits, your gadgets, and a suspiciously helpful voice in your ear.</p>
+    <p>The public page you arrived from is your cover. To the world it is an ordinary personal site. To those who know where to click, it is the Agency's front door.</p>
+  </div>
+
+  <div class="panel">
+    <h2>AGENT DOSSIER</h2>
+    <p><span class="field">CODENAME:</span> <span class="val">[assign your own]</span></p>
+    <p><span class="field">STATUS:</span> <span class="val">Active &mdash; presumed expendable</span></p>
+    <p><span class="field">THREAT:</span> <span class="val">Zoraxis Corporation</span></p>
+    <p><span class="field">LAST KNOWN LOCATION:</span> <span class="redacted">REDACTED</span></p>
+    <p><span class="field">SPECIALTY:</span> not dying (results may vary)</p>
+  </div>
+
+  <div class="panel">
+    <h2>HOW TO PLAY</h2>
+    <ul>
+      <li>Assume the role of the Agent. Everything you touch might kill you &mdash; check it twice.</li>
+      <li>The Handler feeds you objectives. Improvise when they inevitably go sideways.</li>
+      <li>Solve the room, disarm the trap, escape before the timer runs out.</li>
+      <li>Golden rule of the Agency: we expect you to die. Try to disappoint us.</li>
+    </ul>
+  </div>
+
+  <p class="warn">&#9888; This channel self-destructs from memory the moment you close it.</p>
+  <p><a class="back" href="index.html">&larr; return to cover identity</a></p>
+</body>
+</html>
