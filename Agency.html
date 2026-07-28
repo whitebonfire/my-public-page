@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var nameInput=document.getElementById('nameInput');
   var specInput=document.getElementById('specInput');
   if(nameInput) nameInput.addEventListener('input',updateForm);
-  if(specInput) specInput.addEventListener('input',updateForm);
+  if(specInput) specInput.addEventListener('input',updateForm); var startBtn=document.getElementById('startBtn'); if(startBtn) startBtn.addEventListener('click',function(){ if(!startBtn.disabled){ window.location.href='training.html'; } });
   updateForm();
 });
 
