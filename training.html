@@ -105,7 +105,7 @@ if (mod.dataset.done) return;
 mod.dataset.done = '1';
 answered++;
 if (i === ans) { opt.classList.add('correct'); fb.textContent = 'CORRECT'; fb.style.color = '#3fae6b'; correct++; }
-else { opt.classList.add('wrong'); opts[ans].classList.add('correct'); fb.textContent = 'INCORRECT'; fb.style.color = '#d7263d'; }
+else { opt.classList.add('wrong'); fb.textContent = 'INCORRECT'; fb.style.color = '#d7263d'; }
 var s = document.getElementById('score');
 s.textContent = 'SCORE: ' + correct + ' / ' + total;
 if (answered === total) { s.textContent += (correct === total ? ' \u2014 FIELD READY' : ' \u2014 ADDITIONAL TRAINING ADVISED'); }
