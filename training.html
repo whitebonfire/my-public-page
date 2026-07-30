@@ -88,9 +88,9 @@ a.back:hover { color: #ffe9c9; }
 var unlockInput = document.getElementById('unlock-input');
 if (unlockInput) {
 unlockInput.addEventListener('input', function(){
-if (this.value.trim().toLowerCase() === 'agent') {
+if (['agent','reginald','phantom','agency','handler','phoenix','prism'].includes(this.value.trim().toLowerCase())) {document.getElementById('opt-hidden').style.display = 'block';
 document.getElementById('opt-hidden').style.display = 'block';
-this.style.display = 'none';
+this.style.display = 'none';                                                                                                                    this.style.display = 'none';
 }
 });
 }
