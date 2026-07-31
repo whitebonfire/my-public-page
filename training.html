@@ -108,7 +108,7 @@ if (i === ans) { opt.classList.add('correct'); fb.textContent = 'CORRECT'; fb.st
 else { opt.classList.add('wrong'); fb.textContent = 'INCORRECT'; fb.style.color = '#d7263d'; }
 var s = document.getElementById('score');
 s.textContent = 'SCORE: ' + correct + ' / ' + total;
-if (answered === total) { s.textContent += (correct === total ? ' \u2014 FIELD READY' : ' \u2014 ADDITIONAL TRAINING ADVISED'); }
+      if (answered === total) { s.textContent += (correct === total ? ' \u2014 CLEARANCE GRANTED' : ' \u2014 ADDITIONAL TRAINING ADVISED'); var btn = document.createElement('a'); btn.href = 'Agency-choice.html'; btn.textContent = 'CONTINUE'; btn.className = 'back'; btn.style.display = 'inline-block'; btn.style.marginTop = '20px'; s.parentNode.insertBefore(btn, s.nextSibling); }
 });
 });
 });
