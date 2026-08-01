@@ -1,1 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enhanced Operatives Division &mdash; Augmentation Selection</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 20%, #16202b 0%, #070a0e 65%);
+  color: #e6e2d6;
+  font-family: "Courier New", monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1.25rem 4rem;
+}
+.logo {
+  width: 150px; height: 150px;
+  margin-bottom: 1.25rem;
+  filter: drop-shadow(0 0 22px rgba(216, 178, 58, 0.4));
+}
+h1 { font-size: 1.35rem; letter-spacing: 0.28em; margin: 0 0 0.25rem; text-align: center; color: #e8c65a; }
+.tag { color: #d7263d; letter-spacing: 0.35em; font-size: 0.72rem; margin-bottom: 0.4rem; text-align: center; }
+.motto { color: #9fb0bf; letter-spacing: 0.2em; font-size: 0.7rem; margin-bottom: 2rem; text-align: center; font-style: italic; }
+.panel {
+  max-width: 42rem;
+  width: 100%;
+  background: rgba(10, 15, 20, 0.7);
+  border: 1px solid #263340;
+  border-radius: 6px;
+  padding: 1.75rem 1.75rem 2rem;
+  margin-bottom: 1.5rem;
+}
+.panel h2 {
+  font-size: 0.8rem; letter-spacing: 0.25em; color: #7fb2d6;
+  border-bottom: 1px solid #263340; padding-bottom: 0.5rem; margin: 0 0 1rem;
+}
+p { line-height: 1.7; margin: 0 0 0.9rem; font-size: 0.95rem; }
+.options { display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem; }
+.option {
+  display: block; text-align: left;
+  background: rgba(38, 51, 64, 0.35);
+  border: 1px solid #263340; border-radius: 5px;
+  padding: 1rem 1.1rem; cursor: pointer;
+  font-family: inherit; color: #e6e2d6;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.option:hover { border-color: #7fb2d6; background: rgba(51, 71, 90, 0.4); }
+.option.selected {
+  border-color: #e8c65a; background: rgba(232, 198, 90, 0.08);
+  box-shadow: 0 0 18px rgba(216, 178, 58, 0.25);
+}
+.option .name { color: #e8c65a; letter-spacing: 0.18em; font-size: 0.9rem; font-weight: bold; display: block; margin-bottom: 0.35rem; }
+.option .desc { color: #9fb0bf; font-size: 0.82rem; line-height: 1.6; }
+.option .code { color: #7fb2d6; float: right; font-size: 0.72rem; letter-spacing: 0.12em; }
+.readout { color: #9fb0bf; font-size: 0.82rem; letter-spacing: 0.12em; margin-top: 1.25rem; text-align: center; }
+.readout .val { color: #ffe9c9; }
+.startbtn {
+  display: block; margin: 1.25rem auto 0;
+  background: #e8c65a; color: #0a0f14;
+  border: 1px solid #e8c65a; border-radius: 4px;
+  padding: 0.7rem 1.6rem; font-family: inherit; font-weight: bold;
+  font-size: 0.85rem; letter-spacing: 0.2em; cursor: pointer;
+  transition: opacity 0.2s;
+}
+.startbtn:hover:not(:disabled) { background: #ffe9c9; }
+.startbtn:disabled { opacity: 0.4; cursor: not-allowed; }
+.warn { color: #d7263d; letter-spacing: 0.15em; text-align: center; font-size: 0.85rem; margin-top: 0.5rem; }
+a.back { color: #7fb2d6; text-decoration: none; font-size: 0.8rem; letter-spacing: 0.15em; }
+a.back:hover { color: #ffe9c9; }
+</style>
+</head>
+<body>
+<img class="logo" src="logo.png" alt="Enhanced Operatives Division seal">
+<h1>ENHANCED OPERATIVES DIVISION</h1>
+<div class="tag">AUGMENTATION SELECTION &mdash; EYES ONLY</div>
+<div class="motto">&ldquo;Choose what you carry into the field&rdquo;</div>
 
+<div class="panel">
+  <h2>AUGMENTATION BRIEFING</h2>
+  <p>Every operative deploys with a single sanctioned enhancement &mdash; or none at all. Your choice is permanent for the duration of this assignment. Select carefully.</p>
+
+  <h2>SELECT YOUR IMPLANT</h2>
+  <div class="options">
+    <button type="button" class="option" data-choice="TK IMPLANT">
+      <span class="name">TK IMPLANT <span class="code">CLASS-A</span></span>
+      <span class="desc">Neural telekinetic interface. Manipulate objects at a distance through focused intent. Demanding on the mind &mdash; and unforgiving of hesitation.</span>
+    </button>
+    <button type="button" class="option" data-choice="OCULAR IMPLANT">
+      <span class="name">OCULAR IMPLANT <span class="code">CLASS-B</span></span>
+      <span class="desc">Augmented optical array. Low-light vision, threat tagging, and a data overlay fed straight to the retina. Sees what others miss.</span>
+    </button>
+    <button type="button" class="option" data-choice="NONE">
+      <span class="name">NONE <span class="code">BASELINE</span></span>
+      <span class="desc">No augmentation. Deploy as you are. Nothing to malfunction, nothing to trace &mdash; just skill, nerve, and instinct.</span>
+    </button>
+  </div>
+
+  <p class="readout">SELECTED AUGMENTATION: <span class="val" id="choiceVal">NONE SELECTED</span></p>
+
+  <button type="button" id="startBtn" class="startbtn" disabled>CONFIRM &amp; CONTINUE</button>
+</div>
+
+<p class="warn">&#9888; This channel self-destructs from memory the moment you close it.</p>
+<p><a class="back" href="Agency.html">&larr; return to dossier</a></p>
+<script>
+var deny=function(m){try{alert(m);}catch(e){}};
+document.addEventListener('keydown',function(e){var k=(e.key||'').toLowerCase();if((e.ctrlKey||e.metaKey)&&(k==='s'||k==='u')){e.preventDefault();deny('ACCESS DENIED - This channel cannot be saved.');return false;}if((e.ctrlKey||e.metaKey)&&k==='c'){e.preventDefault();deny('ACCESS DENIED - Copying is restricted.');return false;}});
+document.addEventListener('copy',function(e){e.preventDefault();if(e.clipboardData){e.clipboardData.setData('text/plain','');}deny('ACCESS DENIED - Copying is restricted.');});
+document.addEventListener('contextmenu',function(e){e.preventDefault();deny('ACCESS DENIED - EYES ONLY.');});
+
+document.addEventListener('DOMContentLoaded',function(){
+  var options=document.querySelectorAll('.option');
+  var choiceVal=document.getElementById('choiceVal');
+  var startBtn=document.getElementById('startBtn');
+  var selected=null;
+  options.forEach(function(opt){
+    opt.addEventListener('click',function(){
+      options.forEach(function(o){o.classList.remove('selected');});
+      opt.classList.add('selected');
+      selected=opt.getAttribute('data-choice');
+      if(choiceVal) choiceVal.textContent=selected;
+      if(startBtn) startBtn.disabled=false;
+    });
+  });
+  if(startBtn) startBtn.addEventListener('click',function(){
+    if(!startBtn.disabled){
+      try{ localStorage.setItem('eod_augmentation', selected||'NONE'); }catch(e){}
+      window.location.href='training.html';
+    }
+  });
+});
+</script>
+</body>
+</html>
