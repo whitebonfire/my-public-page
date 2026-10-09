@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Exile Message</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 40px 16px; }
+    #play-hint { color: #666; display: none; }
+  </style>
+</head>
+<body>
+  <h1>The Exile Message</h1>
+
+  <!-- Plays automatically when the page opens -->
+  <audio id="exile-audio" src="exile-therapy.mp3" autoplay controls></audio>
+  <p id="play-hint">Click anywhere to start the audio.</p>
+
+  <script>
+    // Most browsers block sound until the visitor interacts with the page.
+    // If autoplay is blocked, start the audio on the first click or key press.
+    const audio = document.getElementById('exile-audio');
+    const hint = document.getElementById('play-hint');
+
+    function startAudio() {
+      audio.play().then(() => {
+        hint.style.display = 'none';
+        document.removeEventListener('click', startAudio);
+        document.removeEventListener('keydown', startAudio);
+      }).catch(() => {});
+    }
+
+    audio.play().catch(() => {
+      hint.style.display = 'block';
+      document.addEventListener('click', startAudio);
+      document.addEventListener('keydown', startAudio);
+    });
+  </script>
+</body>
+</html>
