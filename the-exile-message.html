@@ -7,6 +7,8 @@
   <style>
     body { font-family: sans-serif; text-align: center; padding: 40px 16px; }
     #play-hint { color: #666; display: none; }
+    #loop-btn { margin-top: 12px; padding: 8px 16px; font-size: 16px; border-radius: 8px; border: 1px solid #888; background: #f2f2f2; cursor: pointer; }
+    #loop-btn.on { background: #2e7d32; color: #fff; border-color: #2e7d32; }
   </style>
 </head>
 <body>
@@ -14,6 +16,8 @@
 
   <!-- Plays automatically when the page opens -->
   <audio id="exile-audio" src="exile-therapy.mp3" autoplay controls></audio>
+  <br>
+  <button id="loop-btn" type="button" aria-pressed="false">Loop: Off</button>
   <p id="play-hint">Click anywhere to start the audio.</p>
 
   <script>
@@ -21,6 +25,15 @@
     // If autoplay is blocked, start the audio on the first click or key press.
     const audio = document.getElementById('exile-audio');
     const hint = document.getElementById('play-hint');
+    const loopBtn = document.getElementById('loop-btn');
+
+    // Loop button: turns repeating on and off
+    loopBtn.addEventListener('click', () => {
+      audio.loop = !audio.loop;
+      loopBtn.textContent = audio.loop ? 'Loop: On' : 'Loop: Off';
+      loopBtn.classList.toggle('on', audio.loop);
+      loopBtn.setAttribute('aria-pressed', audio.loop);
+    });
 
     function startAudio() {
       audio.play().then(() => {
